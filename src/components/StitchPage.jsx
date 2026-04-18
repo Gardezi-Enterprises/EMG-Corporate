@@ -17,6 +17,10 @@ function normalizeText(text) {
   return text.replace(/\s+/g, ' ').trim().toLowerCase()
 }
 
+function toHashRoute(route) {
+  return `/#${route}`
+}
+
 function injectRouteBehavior(documentNode) {
   const nav = documentNode.querySelector('nav')
   if (!nav) {
@@ -31,7 +35,7 @@ function injectRouteBehavior(documentNode) {
     }
 
     if (element.tagName.toLowerCase() === 'a') {
-      element.setAttribute('href', route)
+      element.setAttribute('href', toHashRoute(route))
       element.setAttribute('target', '_top')
       return
     }
@@ -51,7 +55,7 @@ function injectRouteBehavior(documentNode) {
         anchor.setAttribute(attribute.name, attribute.value)
       })
 
-      anchor.setAttribute('href', route)
+      anchor.setAttribute('href', toHashRoute(route))
       anchor.setAttribute('target', '_top')
       element.replaceWith(anchor)
     }
@@ -70,7 +74,7 @@ function injectTopNavigationScript(documentNode) {
       event.preventDefault();
       var route = routeTarget.getAttribute('data-route');
       if (route) {
-        window.top.location.assign(route);
+        window.top.location.assign('/#' + route);
       }
     });
   `
@@ -105,7 +109,7 @@ function StitchPage({ source }) {
 
         setIframeHtml(documentNode.documentElement.outerHTML)
         setStatus('ready')
-      } catch (error) {
+      } catch {
         if (isMounted) {
           setStatus('error')
         }
