@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lumina AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind = {
+        config: {
+          darkMode: 'class',
+          theme: {
+            extend: {
+              colors: {
+                'surface-variant': '#e0e3e5',
+                'on-primary-container': '#004752',
+                'tertiary-container': '#b19fff',
+                'tertiary-fixed-dim': '#cbbeff',
+                'on-tertiary': '#ffffff',
+                'on-background': '#191c1e',
+                'surface-container-high': '#e6e8ea',
+                'primary-fixed': '#a2eeff',
+                'secondary-fixed': '#d6e4f9',
+                'inverse-primary': '#43d8f2',
+                'on-surface-variant': '#3c494c',
+                'secondary-container': '#d3e1f6',
+                'surface-container-lowest': '#ffffff',
+                tertiary: '#6345cb',
+                'inverse-surface': '#2d3133',
+                'surface-container': '#eceef0',
+                'on-secondary-fixed': '#0f1c2c',
+                'surface-tint': '#006877',
+                'primary-container': '#00bdd6',
+                'on-error': '#ffffff',
+                'on-tertiary-container': '#441fac',
+                surface: '#f7f9fb',
+                primary: '#006877',
+                'on-tertiary-fixed': '#1d0061',
+                'on-tertiary-fixed-variant': '#4a28b2',
+                'on-secondary': '#ffffff',
+                'surface-dim': '#d8dadc',
+                'on-secondary-container': '#566475',
+                outline: '#6c797d',
+                'on-surface': '#191c1e',
+                'secondary-fixed-dim': '#bac8dc',
+                'on-primary-fixed': '#001f25',
+                'on-primary': '#ffffff',
+                'primary-fixed-dim': '#43d8f2',
+                'tertiary-fixed': '#e6deff',
+                'outline-variant': '#bbc9cc',
+                'surface-container-low': '#f2f4f6',
+                'surface-bright': '#f7f9fb',
+                'error-container': '#ffdad6',
+                'on-error-container': '#93000a',
+                secondary: '#525f71',
+                error: '#ba1a1a',
+                'surface-container-highest': '#e0e3e5',
+                'on-secondary-fixed-variant': '#3a4859',
+                'inverse-on-surface': '#eff1f3',
+                'on-primary-fixed-variant': '#004e5a',
+                background: '#f7f9fb',
+              },
+              borderRadius: {
+                DEFAULT: '0.125rem',
+                lg: '0.25rem',
+                xl: '0.5rem',
+                full: '0.75rem',
+              },
+              fontFamily: {
+                headline: ['Space Grotesk', 'sans-serif'],
+                body: ['Inter', 'sans-serif'],
+                label: ['Inter', 'sans-serif'],
+              },
+            },
+          },
+        },
+      }
+    </script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Work - Lumina AI Architecture</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e0e3e5",
+                        "on-primary-container": "#004752",
+                        "tertiary-container": "#b19fff",
+                        "tertiary-fixed-dim": "#cbbeff",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#191c1e",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-fixed": "#a2eeff",
+                        "secondary-fixed": "#d6e4f9",
+                        "inverse-primary": "#43d8f2",
+                        "on-surface-variant": "#3c494c",
+                        "secondary-container": "#d3e1f6",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#6345cb",
+                        "inverse-surface": "#2d3133",
+                        "surface-container": "#eceef0",
+                        "on-secondary-fixed": "#0f1c2c",
+                        "surface-tint": "#006877",
+                        "primary-container": "#00bdd6",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#441fac",
+                        "surface": "#f7f9fb",
+                        "primary": "#006877",
+                        "on-tertiary-fixed": "#1d0061",
+                        "on-tertiary-fixed-variant": "#4a28b2",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "on-secondary-container": "#566475",
+                        "outline": "#6c797d",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed-dim": "#bac8dc",
+                        "on-primary-fixed": "#001f25",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#43d8f2",
+                        "tertiary-fixed": "#e6deff",
+                        "outline-variant": "#bbc9cc",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-bright": "#f7f9fb",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "secondary": "#525f71",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#3a4859",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-primary-fixed-variant": "#004e5a",
+                        "background": "#f7f9fb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar (Shared Component) -->
+<nav class="bg-white/70 dark:bg-slate-900/70 backdrop-blur-lg docked full-width top-0 sticky z-50 font-['Space_Grotesk'] font-medium tracking-tight">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-6 h-20">
+<!-- Brand -->
+<div class="text-xl font-bold tracking-tighter text-slate-900 dark:text-white">
+                LUMINA_AI
+            </div>
+<!-- Navigation Links -->
+<div class="hidden md:flex space-x-8">
+<a class="text-slate-600 dark:text-slate-400 hover:text-cyan-500 transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-all duration-300 px-3 py-2" href="#">Services</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-cyan-500 transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-all duration-300 px-3 py-2" href="#">Industries</a>
+<a class="text-cyan-600 dark:text-cyan-400 font-bold border-b-2 border-cyan-500 pb-1 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-all duration-300 px-3 py-2" href="#">Portfolio</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-cyan-500 transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-all duration-300 px-3 py-2" href="#">About</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-cyan-500 transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-all duration-300 px-3 py-2" href="#">Blog</a>
+</div>
+<!-- Trailing Action -->
+<button class="text-cyan-600 dark:text-cyan-400 font-bold opacity-80 hover:opacity-100 hover:scale-95 transition-transform duration-300">
+                Consult AI
+            </button>
+</div>
+<!-- Separation Logic -->
+<div class="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 h-[1px] w-full absolute bottom-0 shadow-sm shadow-cyan-900/5"></div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="relative w-full overflow-hidden">
+<!-- Ambient Generative Glow -->
+<div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-primary/10 to-tertiary/10 blur-[100px] pointer-events-none z-0"></div>
+<!-- Hero Section -->
+<section class="relative z-10 pt-24 pb-16 px-6 max-w-7xl mx-auto">
+<h1 class="font-headline text-[3.5rem] leading-none tracking-[-0.02em] text-on-surface mb-6 max-w-4xl">
+                Intelligence Defined Through <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary">Execution.</span>
+</h1>
+<p class="font-body text-lg text-on-surface-variant max-w-2xl">
+                A curated portfolio of architectural AI solutions. We transform abstract complexity into grounded, scalable enterprise infrastructure.
+            </p>
+</section>
+<!-- Detailed Case Study (Anchor) -->
+<section class="relative z-10 bg-surface-container-low py-24 mt-8">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Content Side -->
+<div class="lg:col-span-5 flex flex-col space-y-8">
+<div>
+<span class="font-label text-sm text-primary tracking-wider uppercase mb-2 block">Featured Case Study</span>
+<h2 class="font-headline text-3xl md:text-4xl text-on-surface leading-tight tracking-tight mb-4">
+                            Optimizing Supply Chains with Predictive AI
+                        </h2>
+<p class="font-body text-on-surface-variant">
+                            Global logistics networks require split-second adaptability. We engineered a predictive forecasting engine that anticipates disruptions before they cascade across the supply chain.
+                        </p>
+</div>
+<div class="space-y-6">
+<div class="bg-surface p-6 rounded relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-surface-variant group-hover:bg-primary transition-colors duration-300"></div>
+<h3 class="font-headline text-lg text-on-surface mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">warning</span>
+                                The Problem
+                            </h3>
+<p class="font-body text-sm text-on-surface-variant">
+                                Reliance on historical data created a reactive environment, resulting in high warehousing costs and delayed shipments during global anomalies.
+                            </p>
+</div>
+<div class="bg-surface p-6 rounded relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-surface-variant group-hover:bg-tertiary transition-colors duration-300"></div>
+<h3 class="font-headline text-lg text-on-surface mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">architecture</span>
+                                The Solution
+                            </h3>
+<p class="font-body text-sm text-on-surface-variant">
+                                Deployed a multi-modal neural network analyzing real-time weather, geopolitical events, and sensor data to dynamically reroute inventory.
+                            </p>
+</div>
+</div>
+<!-- Button Primary -->
+<button class="bg-primary text-on-primary font-label px-6 py-3 rounded self-start hover:bg-primary-container hover:text-on-primary-container transition-colors duration-300">
+                        Read Full Technical Report
+                    </button>
+</div>
+<!-- Visual/Data Side -->
+<div class="lg:col-span-7 relative">
+<!-- Image -->
+<div class="relative w-full aspect-[4/3] rounded overflow-hidden bg-surface-variant">
+<img alt="high contrast aerial view of modern automated shipping port at twilight with glowing cyan data nodes overlaid on physical containers" class="w-full h-full object-cover opacity-90 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700" data-alt="high contrast aerial view of modern automated shipping port at twilight with glowing cyan data nodes overlaid on physical containers, futuristic logistics, deep cinematic shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0-PI-s4PW5qPSeJ8A4emR_agwjrJS2kJnNJrItapUu3-dMkYEVfxGJbAky03rxYUFuZHhwh-wdOyfpZp4RzUrwGJNRK4hJOeML-fQoZYMr3dZaksBd29KR47KhPC71K_BBM72Ue2-Os71WSVveTJmjObl5TLvwiVpe8B32KiOb1GExA3-WDwH9jY6hn_ykN2Eh_BJH1-SqMlZTJCvOkYod_TtPIqwgUwe9qik57sM6TaytznB4XWhdbrjLwtZO7xH8A5tEI_kwWQ"/>
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent"></div>
+</div>
+<!-- Floating Stats Card (Glassmorphism & Asymmetry) -->
+<div class="absolute -bottom-8 -left-8 md:bottom-12 md:-left-12 bg-surface/80 backdrop-blur-xl p-6 rounded border border-outline-variant/20 shadow-2xl max-w-xs">
+<div class="flex items-end gap-3 mb-2">
+<span class="font-headline text-5xl text-primary leading-none tracking-tighter">30%</span>
+<span class="material-symbols-outlined text-tertiary text-3xl mb-1" data-weight="fill" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+</div>
+<p class="font-headline text-sm text-on-surface font-semibold mb-1">Increase in Routing Efficiency</p>
+<p class="font-body text-xs text-on-surface-variant">Measured across 4 continents over an 18-month deployment phase.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Project Grid (Bento Style) -->
+<section class="relative z-10 py-24 px-6 max-w-7xl mx-auto">
+<div class="flex justify-between items-end mb-12">
+<h2 class="font-headline text-3xl text-on-surface tracking-tight">Recent Deployments</h2>
+<a class="font-label text-sm text-primary hover:text-tertiary transition-colors flex items-center gap-1 group" href="#">
+                    View Archive 
+                    <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded relative overflow-hidden group cursor-pointer h-[400px] flex flex-col justify-end">
+<div class="absolute inset-0 bg-surface-variant">
+<img alt="close up of sophisticated server rack infrastructure bathed in cool blue and purple led lighting in a clean data center environment" class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" data-alt="close up of sophisticated server rack infrastructure bathed in cool blue and purple led lighting in a clean data center environment, shallow depth of field, high-tech aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSN-cEDxPUTyJ2Nd3s_xQpQ4UhyhOQR5PfeqqO49Crv9uBi4GMe_2QJeoBROnZqQvKD_LhIeAF5Egxdz5m9czx-8b2gbbHQ80M93lzKRp3FLNIsA-ujxYfqYsNUVxfQZXAt5yDcSyGzEEdEVvCiPhegAlEDOAvS2qCqIJP4lSUSn7EK7fPeAW9m2PNrHT6Ns29vlCGNDL62Hi-1qvtnDpF2Tf2Ly8hZitu9KJ7I81Fj7PxekBXGi01QiPkmcXtuiyEr1yrlVlR5tQ"/>
+</div>
+<!-- Gradient overlay for text readability -->
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface via-inverse-surface/40 to-transparent opacity-90"></div>
+<div class="relative z-10 p-6">
+<span class="inline-block px-2 py-1 bg-primary/20 text-primary-fixed text-xs font-label mb-3 rounded backdrop-blur-md">Cybersecurity</span>
+<h3 class="font-headline text-xl text-white mb-2 group-hover:text-primary-fixed transition-colors">Autonomous Threat Neutralization</h3>
+<p class="font-body text-sm text-surface-variant line-clamp-2">Implemented a self-healing network architecture capable of isolating zero-day exploits within milliseconds.</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded relative overflow-hidden group cursor-pointer h-[400px] flex flex-col justify-end">
+<div class="absolute inset-0 bg-surface-variant">
+<img alt="abstract visualization of natural language processing using floating geometric shapes and typography in deep space setting" class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" data-alt="abstract visualization of natural language processing using floating geometric shapes and typography in deep space setting, glowing cyan and violet accents, minimal editorial style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2HYwNOWskKJZ-ocxQ8_AMgZKmxh1yVgMeg_EbvtIhJppFR8NH3mWNXTE2imO3cKqhx2ircikrlA874sKWfGpacVdulZLwf9VZWDPUBayv2YCR125guqTmuciqD_cwu_iDH3eWNCNjIuflY6yE4bpgOf4c_ai_CdbEZ40B8FwTQXA-4Tm5Qxo53GfjPSDEUOZN754PczpjLTVnWSbva2jIRMSogWOfQZaNf0fkI2kc4MtIqV8Fgs7UJFl2o1w6_ckd4gjHSYsXzdU"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface via-inverse-surface/40 to-transparent opacity-90"></div>
+<div class="relative z-10 p-6">
+<span class="inline-block px-2 py-1 bg-tertiary/20 text-tertiary-fixed text-xs font-label mb-3 rounded backdrop-blur-md">Healthcare</span>
+<h3 class="font-headline text-xl text-white mb-2 group-hover:text-tertiary-fixed-dim transition-colors">NLP for Clinical Diagnostics</h3>
+<p class="font-body text-sm text-surface-variant line-clamp-2">Streamlined unstructured patient data processing, reducing diagnostic review time by 45%.</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded relative overflow-hidden group cursor-pointer h-[400px] flex flex-col justify-end lg:col-span-1 md:col-span-2 lg:col-start-auto">
+<div class="absolute inset-0 bg-surface-variant">
+<img alt="precision robotic arm assembling intricate microelectronics in a sterile bright white laboratory environment with sharp focus" class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" data-alt="precision robotic arm assembling intricate microelectronics in a sterile bright white laboratory environment with sharp focus, clinical precision, cool lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeK9ylO3AyUaIEFXPvTdZWzS-0ziHJqjgyVhjrADaWkVwRLcTwpb01j93S8hkk-9tOGk4SqwkBgJ3BNDm0sGxERDyIIr-1OB7yA9cSTlGsGdc7t4T4eqJdI0nRY-wp-ZevaBVjHg_n6HYSAC-GWY97D2hvtdnnXAzBGt63CHqajybJ0yhvsPGPeWyiufHnXNgVB20pK2IJm3foQUH8toqyaL1EWsi0RmmR583ELdcPAfEoQo0X1CtOScNYgsE15QSkuc5dLdavDHo"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface via-inverse-surface/40 to-transparent opacity-90"></div>
+<div class="relative z-10 p-6">
+<span class="inline-block px-2 py-1 bg-secondary/30 text-secondary-fixed text-xs font-label mb-3 rounded backdrop-blur-md">Manufacturing</span>
+<h3 class="font-headline text-xl text-white mb-2 group-hover:text-secondary-fixed transition-colors">Computer Vision Quality Assurance</h3>
+<p class="font-body text-sm text-surface-variant line-clamp-2">Defect detection model deployed at edge layer, achieving 99.8% accuracy on high-speed assembly lines.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-slate-50 dark:bg-slate-950 w-full py-12 border-t-0 font-['Inter'] text-sm text-slate-500 dark:text-slate-400">
+<div class="bg-surface-container-low h-px w-full mb-12 hidden"></div> <!-- Separation logic translated to visual if needed, though JSON says bg-surface-container-low for separation logic. I'll use it as a top border equivalent using bg -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto px-6 flat no shadows Static editorial layout">
+<!-- Brand -->
+<div class="md:col-span-1">
+<div class="font-['Space_Grotesk'] font-bold text-lg text-slate-900 dark:text-white mb-4">
+                    LUMINA_AI
+                </div>
+<p>© 2024 Lumina AI Architecture. Intelligence Defined.</p>
+</div>
+<!-- Links -->
+<div class="md:col-span-3 flex flex-wrap gap-6 justify-start md:justify-end">
+<a class="text-slate-500 hover:text-cyan-500 hover:translate-x-1 transition-transform duration-200" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-cyan-500 hover:translate-x-1 transition-transform duration-200" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-cyan-500 hover:translate-x-1 transition-transform duration-200" href="#">Security</a>
+<a class="text-slate-500 hover:text-cyan-500 hover:translate-x-1 transition-transform duration-200" href="#">Careers</a>
+</div>
+</div>
+</footer>
+</body></html>
