@@ -1,39 +1,47 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import StitchPage from './components/StitchPage'
+import homepageMarkup from './stitch_html/homepage.html?raw'
+import aboutUsMarkup from './stitch_html/about_us.html?raw'
+import servicesMarkup from './stitch_html/services_solutions.html?raw'
+import industryMarkup from './stitch_html/industry_specific_ai.html?raw'
+import fullStackMarkup from './stitch_html/full_stack_web_development.html?raw'
+import caseStudiesMarkup from './stitch_html/case_studies.html?raw'
+import blogMarkup from './stitch_html/blog_insights.html?raw'
+import contactMarkup from './stitch_html/contact.html?raw'
 
 function App() {
   const pageMap = [
     {
       path: '/homepage',
-      source: '/stitch_pages/homepage/code.html',
+      markup: homepageMarkup,
     },
     {
       path: '/about-us',
-      source: '/stitch_pages/about_us/code.html',
+      markup: aboutUsMarkup,
     },
     {
       path: '/services-solutions',
-      source: '/stitch_pages/services_solutions/code.html',
+      markup: servicesMarkup,
     },
     {
       path: '/industry-specific-ai',
-      source: '/stitch_pages/industry_specific_ai/code.html',
+      markup: industryMarkup,
     },
     {
       path: '/full-stack-web-development',
-      source: '/stitch_pages/full_stack_web_development/code.html',
+      markup: fullStackMarkup,
     },
     {
       path: '/case-studies',
-      source: '/stitch_pages/case_studies/code.html',
+      markup: caseStudiesMarkup,
     },
     {
       path: '/blog-insights',
-      source: '/stitch_pages/blog_insights/code.html',
+      markup: blogMarkup,
     },
     {
       path: '/contact',
-      source: '/stitch_pages/contact/code.html',
+      markup: contactMarkup,
     },
   ]
 
@@ -44,7 +52,7 @@ function App() {
         <Route
           key={page.path}
           path={page.path}
-          element={<StitchPage source={page.source} />}
+          element={<StitchPage markup={page.markup} />}
         />
       ))}
       <Route path="*" element={<Navigate replace to="/homepage" />} />

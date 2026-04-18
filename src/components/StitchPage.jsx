@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const NAV_ROUTE_MAP = {
   home: '/homepage',
@@ -18,7 +19,7 @@ function normalizeText(text) {
 }
 
 function toHashRoute(route) {
-  return `/#${route}`
+  return `#${route}`
 }
 
 function injectRouteBehavior(documentNode) {
@@ -62,81 +63,44 @@ function injectRouteBehavior(documentNode) {
   })
 }
 
-function injectTopNavigationScript(documentNode) {
-  const script = documentNode.createElement('script')
-  script.textContent = `
-    document.addEventListener('click', function (event) {
-      var routeTarget = event.target.closest('[data-route]');
-      if (!routeTarget) {
-        return;
-      }
+function StitchPage({ markup }) {
+  const navigate = useNavigate()
 
-      event.preventDefault();
-      var route = routeTarget.getAttribute('data-route');
-      if (route) {
-        window.top.location.assign('/#' + route);
-      }
-    });
-  `
+  const page = useMemo(() => {
+    const documentNode = new DOMParser().parseFromString(markup, 'text/html')
+    injectRouteBehavior(documentNode)
 
-  documentNode.body.appendChild(script)
-}
-
-function StitchPage({ source }) {
-  const [iframeHtml, setIframeHtml] = useState('')
-  const [status, setStatus] = useState('loading')
+    return {
+      title: documentNode.title || 'Lumina AI',
+      bodyClassName: documentNode.body.getAttribute('class') || '',
+      html: documentNode.body.innerHTML,
+    }
+  }, [markup])
 
   useEffect(() => {
-    let isMounted = true
+    document.title = page.title
+  }, [page.title])
 
-    const loadHtml = async () => {
-      setStatus('loading')
-
-      try {
-        const response = await fetch(source)
-        if (!response.ok) {
-          throw new Error(`Failed to load page: ${source}`)
-        }
-
-        const markup = await response.text()
-        const documentNode = new DOMParser().parseFromString(markup, 'text/html')
-        injectRouteBehavior(documentNode)
-        injectTopNavigationScript(documentNode)
-
-        if (!isMounted) {
-          return
-        }
-
-        setIframeHtml(documentNode.documentElement.outerHTML)
-        setStatus('ready')
-      } catch {
-        if (isMounted) {
-          setStatus('error')
-        }
-      }
+  const handleClick = (event) => {
+    const routeTarget = event.target.closest('[data-route]')
+    if (!routeTarget) {
+      return
     }
 
-    loadHtml()
-
-    return () => {
-      isMounted = false
+    const route = routeTarget.getAttribute('data-route')
+    if (!route) {
+      return
     }
-  }, [source])
 
-  if (status === 'loading') {
-    return <div className="stitch-loader">Loading page design...</div>
-  }
-
-  if (status === 'error') {
-    return <div className="stitch-loader">Unable to load this Stitch page.</div>
+    event.preventDefault()
+    navigate(route)
   }
 
   return (
-    <iframe
-      key={source}
-      title="Stitch Page"
-      srcDoc={iframeHtml}
-      style={{ width: '100%', minHeight: '100vh', height: '100vh', border: '0' }}
+    <div
+      className={page.bodyClassName}
+      onClick={handleClick}
+      dangerouslySetInnerHTML={{ __html: page.html }}
     />
   )
 }
