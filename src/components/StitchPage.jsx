@@ -1,6 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
-import parse, { domToReact } from 'html-react-parser'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 const NAV_ROUTE_MAP = {
   home: '/homepage',
@@ -19,50 +17,69 @@ function normalizeText(text) {
   return text.replace(/\s+/g, ' ').trim().toLowerCase()
 }
 
-function isInsideNav(node) {
-  let current = node?.parent
-  while (current) {
-    if (current.type === 'tag' && current.name === 'nav') {
-      return true
+function injectRouteBehavior(documentNode) {
+  const nav = documentNode.querySelector('nav')
+  if (!nav) {
+    return
+  }
+
+  const candidates = nav.querySelectorAll('a, button, div')
+  candidates.forEach((element) => {
+    const route = NAV_ROUTE_MAP[normalizeText(element.textContent || '')]
+    if (!route) {
+      return
     }
-    current = current.parent
-  }
-  return false
+
+    if (element.tagName.toLowerCase() === 'a') {
+      element.setAttribute('href', route)
+      element.setAttribute('target', '_top')
+      return
+    }
+
+    if (element.tagName.toLowerCase() === 'button') {
+      element.setAttribute('data-route', route)
+      element.setAttribute('type', 'button')
+      return
+    }
+
+    if (element.tagName.toLowerCase() === 'div') {
+      const anchor = documentNode.createElement('a')
+      anchor.innerHTML = element.innerHTML
+
+      const attributes = Array.from(element.attributes)
+      attributes.forEach((attribute) => {
+        anchor.setAttribute(attribute.name, attribute.value)
+      })
+
+      anchor.setAttribute('href', route)
+      anchor.setAttribute('target', '_top')
+      element.replaceWith(anchor)
+    }
+  })
 }
 
-function collectText(node) {
-  if (!node) {
-    return ''
-  }
+function injectTopNavigationScript(documentNode) {
+  const script = documentNode.createElement('script')
+  script.textContent = `
+    document.addEventListener('click', function (event) {
+      var routeTarget = event.target.closest('[data-route]');
+      if (!routeTarget) {
+        return;
+      }
 
-  if (node.type === 'text') {
-    return node.data || ''
-  }
+      event.preventDefault();
+      var route = routeTarget.getAttribute('data-route');
+      if (route) {
+        window.top.location.assign(route);
+      }
+    });
+  `
 
-  if (!node.children || node.children.length === 0) {
-    return ''
-  }
-
-  return node.children.map(collectText).join(' ')
-}
-
-function toReactProps(attribs = {}) {
-  const props = { ...attribs }
-
-  if (Object.hasOwn(props, 'class')) {
-    props.className = props.class
-    delete props.class
-  }
-
-  return props
+  documentNode.body.appendChild(script)
 }
 
 function StitchPage({ source }) {
-  const navigate = useNavigate()
-  const [html, setHtml] = useState('')
-  const [bodyClassName, setBodyClassName] = useState('')
-  const [pageTitle, setPageTitle] = useState('Lumina AI')
-  const [styles, setStyles] = useState([])
+  const [iframeHtml, setIframeHtml] = useState('')
   const [status, setStatus] = useState('loading')
 
   useEffect(() => {
@@ -79,15 +96,14 @@ function StitchPage({ source }) {
 
         const markup = await response.text()
         const documentNode = new DOMParser().parseFromString(markup, 'text/html')
+        injectRouteBehavior(documentNode)
+        injectTopNavigationScript(documentNode)
 
         if (!isMounted) {
           return
         }
 
-        setHtml(documentNode.body.innerHTML)
-        setBodyClassName(documentNode.body.getAttribute('class') || '')
-        setPageTitle(documentNode.title || 'Lumina AI')
-        setStyles(Array.from(documentNode.querySelectorAll('style')).map((style) => style.textContent || ''))
+        setIframeHtml(documentNode.documentElement.outerHTML)
         setStatus('ready')
       } catch (error) {
         if (isMounted) {
@@ -103,64 +119,6 @@ function StitchPage({ source }) {
     }
   }, [source])
 
-  useEffect(() => {
-    document.title = pageTitle
-  }, [pageTitle])
-
-  const parseOptions = useMemo(
-    () => ({
-      replace: (domNode) => {
-        if (domNode.type !== 'tag' || !isInsideNav(domNode)) {
-          return undefined
-        }
-
-        const route = NAV_ROUTE_MAP[normalizeText(collectText(domNode))]
-        if (!route) {
-          return undefined
-        }
-
-        if (domNode.name === 'a') {
-          const props = toReactProps(domNode.attribs)
-
-          return (
-            <a {...props} href={route}>
-              {domToReact(domNode.children || [], parseOptions)}
-            </a>
-          )
-        }
-
-        if (domNode.name === 'button') {
-          const props = toReactProps(domNode.attribs)
-
-          return (
-            <button
-              {...props}
-              type={props.type || 'button'}
-              onClick={() => navigate(route)}
-            >
-              {domToReact(domNode.children || [], parseOptions)}
-            </button>
-          )
-        }
-
-        if (domNode.name === 'div') {
-          const props = toReactProps(domNode.attribs)
-
-          return (
-            <a {...props} href={route}>
-              {domToReact(domNode.children || [], parseOptions)}
-            </a>
-          )
-        }
-
-        return undefined
-      },
-    }),
-    [navigate],
-  )
-
-  const renderedHtml = useMemo(() => parse(html, parseOptions), [html, parseOptions])
-
   if (status === 'loading') {
     return <div className="stitch-loader">Loading page design...</div>
   }
@@ -170,12 +128,12 @@ function StitchPage({ source }) {
   }
 
   return (
-    <div className={bodyClassName}>
-      {styles.map((styleText, index) => (
-        <style key={`${source}-${index}`}>{styleText}</style>
-      ))}
-      {renderedHtml}
-    </div>
+    <iframe
+      key={source}
+      title="Stitch Page"
+      srcDoc={iframeHtml}
+      style={{ width: '100%', minHeight: '100vh', height: '100vh', border: '0' }}
+    />
   )
 }
 
