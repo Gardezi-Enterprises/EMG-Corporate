@@ -1,60 +1,25 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
-import StitchPage from './components/StitchPage'
-import homepageMarkup from './stitch_html/homepage.html?raw'
-import aboutUsMarkup from './stitch_html/about_us.html?raw'
-import servicesMarkup from './stitch_html/services_solutions.html?raw'
-import industryMarkup from './stitch_html/industry_specific_ai.html?raw'
-import fullStackMarkup from './stitch_html/full_stack_web_development.html?raw'
-import caseStudiesMarkup from './stitch_html/case_studies.html?raw'
-import blogMarkup from './stitch_html/blog_insights.html?raw'
-import contactMarkup from './stitch_html/contact.html?raw'
+import HomepagePage from './pages/HomepagePage'
+import AboutUsPage from './pages/AboutUsPage'
+import ServicesSolutionsPage from './pages/ServicesSolutionsPage'
+import IndustrySpecificAiPage from './pages/IndustrySpecificAiPage'
+import FullStackWebDevelopmentPage from './pages/FullStackWebDevelopmentPage'
+import CaseStudiesPage from './pages/CaseStudiesPage'
+import BlogInsightsPage from './pages/BlogInsightsPage'
+import ContactPage from './pages/ContactPage'
 
 function App() {
-  const pageMap = [
-    {
-      path: '/homepage',
-      markup: homepageMarkup,
-    },
-    {
-      path: '/about-us',
-      markup: aboutUsMarkup,
-    },
-    {
-      path: '/services-solutions',
-      markup: servicesMarkup,
-    },
-    {
-      path: '/industry-specific-ai',
-      markup: industryMarkup,
-    },
-    {
-      path: '/full-stack-web-development',
-      markup: fullStackMarkup,
-    },
-    {
-      path: '/case-studies',
-      markup: caseStudiesMarkup,
-    },
-    {
-      path: '/blog-insights',
-      markup: blogMarkup,
-    },
-    {
-      path: '/contact',
-      markup: contactMarkup,
-    },
-  ]
-
   return (
     <Routes>
       <Route path="/" element={<Navigate replace to="/homepage" />} />
-      {pageMap.map((page) => (
-        <Route
-          key={page.path}
-          path={page.path}
-          element={<StitchPage markup={page.markup} />}
-        />
-      ))}
+      <Route path="/homepage" element={<HomepagePage />} />
+      <Route path="/about-us" element={<AboutUsPage />} />
+      <Route path="/services-solutions" element={<ServicesSolutionsPage />} />
+      <Route path="/industry-specific-ai" element={<IndustrySpecificAiPage />} />
+      <Route path="/full-stack-web-development" element={<FullStackWebDevelopmentPage />} />
+      <Route path="/case-studies" element={<CaseStudiesPage />} />
+      <Route path="/blog-insights" element={<BlogInsightsPage />} />
+      <Route path="/contact" element={<ContactPage />} />
       <Route path="*" element={<Navigate replace to="/homepage" />} />
     </Routes>
   )
